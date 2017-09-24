@@ -1,0 +1,25 @@
+
+plugins {
+    id "io.spring.dependency-management" version "1.0.3.RELEASE"
+}
+dependencyManagement {
+    imports {
+        mavenBom "io.projectreactor:reactor-bom:Aluminium-SR1"
+    }
+}
+
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'io.projectreactor:reactor-core'
+    testCompile 'io.projectreactor.addons:reactor-test'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
