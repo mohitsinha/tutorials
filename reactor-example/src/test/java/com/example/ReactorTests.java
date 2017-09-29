@@ -63,4 +63,17 @@ public class ReactorTests {
 
         StepVerifier.create(namesWithDelay).expectNext("Mr. John Doe", "Mrs. Jane Blake").verifyComplete();
     }
+
+    @Test
+    public void interleave(){
+        Flux<Long> delay = Flux.interval(Duration.ofMillis(5));
+        Flux<String> alphabetsWithDelay = Flux.just("A", "B").zipWith(delay, (s, l) -> s);
+        Flux<String> alphabetsWithoutDelay = Flux.just("C", "D");
+
+        Flux<String> interleavedFlux = alphabetsWithDelay.mergeWith(alphabetsWithoutDelay);
+        StepVerifier.create(interleavedFlux).expectNext("C", "D", "A", "B").verifyComplete();
+
+        Flux<String> nonInterleavedFlux = alphabetsWithDelay.concatWith(alphabetsWithoutDelay);
+        StepVerifier.create(nonInterleavedFlux).expectNext("A", "B", "C", "D").verifyComplete();
+    }
 }
