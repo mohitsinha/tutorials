@@ -7,6 +7,10 @@ import reactor.test.StepVerifier;
 
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Iterator;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class ReactorTests {
 
@@ -65,7 +69,7 @@ public class ReactorTests {
     }
 
     @Test
-    public void interleave(){
+    public void interleave() {
         Flux<Long> delay = Flux.interval(Duration.ofMillis(5));
         Flux<String> alphabetsWithDelay = Flux.just("A", "B").zipWith(delay, (s, l) -> s);
         Flux<String> alphabetsWithoutDelay = Flux.just("C", "D");
@@ -75,5 +79,16 @@ public class ReactorTests {
 
         Flux<String> nonInterleavedFlux = alphabetsWithDelay.concatWith(alphabetsWithoutDelay);
         StepVerifier.create(nonInterleavedFlux).expectNext("A", "B", "C", "D").verifyComplete();
+    }
+
+    @Test
+    public void block() {
+        String name = Mono.just("Jesse").block();
+        assertEquals("Jesse", name);
+
+        Iterator<String> namesIterator = Flux.just("Tom", "Peter").toIterable().iterator();
+        assertEquals("Tom", namesIterator.next());
+        assertEquals("Peter", namesIterator.next());
+        assertFalse(namesIterator.hasNext());
     }
 }
