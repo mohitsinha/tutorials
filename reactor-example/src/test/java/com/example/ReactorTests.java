@@ -53,5 +53,14 @@ public class ReactorTests {
           .map(t -> t.getT1() + " " + t.getT2() + " " + t.getT3());
 
         StepVerifier.create(names).expectNext("Mr. John Doe", "Mrs. Jane Blake").verifyComplete();
+
+        Flux<Long> delay = Flux.interval(Duration.ofMillis(5));
+        Flux<String> firstNamesWithDelay = firstNames.zipWith(delay, (s, l) -> s);
+
+        Flux<String> namesWithDelay = Flux
+          .zip(titles, firstNamesWithDelay, lastNames)
+          .map(t -> t.getT1() + " " + t.getT2() + " " + t.getT3());
+
+        StepVerifier.create(namesWithDelay).expectNext("Mr. John Doe", "Mrs. Jane Blake").verifyComplete();
     }
 }
