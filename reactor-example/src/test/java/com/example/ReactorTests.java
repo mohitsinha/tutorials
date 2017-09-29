@@ -5,6 +5,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import java.time.Duration;
 import java.util.Arrays;
 
 public class ReactorTests {
@@ -39,5 +40,18 @@ public class ReactorTests {
                 .filter(s -> s.toUpperCase().startsWith("K"))
                 .map(s -> s.toLowerCase());
         StepVerifier.create(fluxMapFilter).expectNext("kyle").verifyComplete();
+    }
+
+    @Test
+    public void zipping() {
+        Flux<String> titles = Flux.just("Mr.", "Mrs.");
+        Flux<String> firstNames = Flux.just("John", "Jane");
+        Flux<String> lastNames = Flux.just("Doe", "Blake");
+
+        Flux<String> names = Flux
+          .zip(titles, firstNames, lastNames)
+          .map(t -> t.getT1() + " " + t.getT2() + " " + t.getT3());
+
+        StepVerifier.create(names).expectNext("Mr. John Doe", "Mrs. Jane Blake").verifyComplete();
     }
 }
