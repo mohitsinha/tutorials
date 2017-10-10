@@ -29,12 +29,9 @@ repositories {
 
 
 dependencies {
-//	compile('org.springframework.boot:spring-boot-starter-data-mysql')
 	compile("org.springframework.boot:spring-boot-starter-data-rest")
-	// JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compile("com.h2database:h2")
-//	compile 'mysql:mysql-connector-java'
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
