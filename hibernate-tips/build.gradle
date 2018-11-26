@@ -27,6 +27,9 @@ repositories {
 dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
 	implementation('org.springframework.boot:spring-boot-starter-webflux')
+	implementation("org.springframework.data:spring-data-envers")
+	implementation("com.fasterxml.jackson.core:jackson-annotations:2.9.7")
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.9.7")
 	runtimeOnly('com.h2database:h2')
 	compileOnly('org.projectlombok:lombok')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
