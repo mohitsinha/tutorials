@@ -8,6 +8,7 @@ import reactor.test.StepVerifier;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -90,5 +91,21 @@ public class ReactorTests {
         assertEquals("Tom", namesIterator.next());
         assertEquals("Peter", namesIterator.next());
         assertFalse(namesIterator.hasNext());
+    }
+
+    @Test
+    public Flux<String> t(){
+
+        Flux<String> s = Flux.fromIterable(getList());
+        return s;
+    }
+
+    private List<String> getList() {
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return Arrays.asList("Hello ", "World", "Std");
     }
 }
