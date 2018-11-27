@@ -12,12 +12,12 @@ import javax.persistence.ManyToOne;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Audited
-public class Student {
+public class Student extends BaseEntity{
 
     String name;
-    String author;
 
     @ManyToOne
     University university;
