@@ -1,5 +1,6 @@
 package com.tutorials.hibernatetips;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tutorials.hibernatetips.models.Student;
 import com.tutorials.hibernatetips.models.University;
 import com.tutorials.hibernatetips.repositories.StudentRepository;
@@ -24,20 +25,23 @@ public class HibernateTipsApplication {
 	@Autowired
 	UniversityRepository universityRepository;
 
-		@Bean
-		CommandLineRunner runner() {
-        return args -> {
-			University build = University.builder().name("Univ 1").build();
-			universityRepository.save(build);
+	@Autowired
+	ObjectMapper objectMapper;
 
-			Student mohit = Student.builder().name("Mohit").university(build).build();
-			studentRepository.save(mohit);
-
-
-			System.out.println("CommandLineRunner running in the UnsplashApplication class...");
-//            activeLoanRepository.save(ActiveLoan.builder().build()).block();
-       };
-    }
+//		@Bean
+//		CommandLineRunner runner() {
+//        return args -> {
+//			University build = University.builder().name("Univ 1").build();
+//			universityRepository.save(build);
+//
+//			Student mohit = Student.builder().name("Mohit").university(build).build();
+//			studentRepository.save(mohit);
+//
+//
+//			System.out.println("CommandLineRunner running in the UnsplashApplication class...");
+////            activeLoanRepository.save(ActiveLoan.builder().build()).block();
+//       };
+//    }
 
 	public static void main(String[] args) {
 		SpringApplication.run(HibernateTipsApplication.class, args);

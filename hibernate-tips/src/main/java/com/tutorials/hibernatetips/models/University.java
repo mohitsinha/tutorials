@@ -6,6 +6,7 @@ import org.hibernate.envers.Audited;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,9 +18,10 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Audited
 public class University extends BaseEntity{
+
     String name;
     String city;
 
     @OneToMany(mappedBy = "university")
-    Set<Student> students;
+    Set<Student> students = new HashSet<>();
 }
