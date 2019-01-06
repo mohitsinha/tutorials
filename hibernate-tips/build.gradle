@@ -30,10 +30,7 @@ dependencies {
 	implementation("org.springframework.data:spring-data-envers")
 	implementation("com.fasterxml.jackson.core:jackson-annotations:2.9.7")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.9.7")
-//    runtime('org.postgresql:postgresql')
-
-    runtimeOnly('org.postgresql:postgresql')
-//	runtimeOnly('com.h2database:h2')
+	runtimeOnly('com.h2database:h2')
 	compileOnly('org.projectlombok:lombok')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	testImplementation('io.projectreactor:reactor-test')

@@ -9,19 +9,11 @@ import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
-@Audited
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder @FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity @Audited
 public class University extends BaseEntity{
-
     String name;
     String city;
-
     @OneToMany(mappedBy = "university")
     Set<Student> students = new HashSet<>();
 }

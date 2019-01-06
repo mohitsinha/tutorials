@@ -33,20 +33,19 @@ public class WebApi {
         return Flux.defer(() -> {
             List<Student> all = studentRepository.findAll();
             return Flux.fromIterable(all);
-        })
-                .subscribeOn(Schedulers.elastic());
+        }).subscribeOn(Schedulers.elastic());
     }
 
-        @Transactional
+    @Transactional
     @GetMapping(value = "/universities")
     public Flux<University> getUniversities() {
 
         List<University> all = universityRepository.findAll();
         return Flux.defer(() -> Flux.fromIterable(all))
-                .doOnNext(university -> university.getStudents().size())
                 .subscribeOn(Schedulers.elastic());
     }
 
+    @Transactional
     @PostMapping(value = "/universities")
     public Mono<ServerResponse> saveUniversity(Mono<University> universityMono) {
         return universityMono
